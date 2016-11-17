@@ -10,7 +10,8 @@ namespace Moth {
 			Application();
 
 
-			void Run();
+			void Run(struct IScene*);
+			void FacePlant();
 
 
 			~Application();

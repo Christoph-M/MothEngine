@@ -1,4 +1,4 @@
-#include "include/Moth.Core/Window.h"
+#include "include\Moth.Core\Window.h"
 
 #include <cstdio>
 
@@ -8,7 +8,7 @@ namespace Moth {
 		bool Window::MakeWindow() {
 			WNDCLASSEX wndClassEx = { 0 };
 				wndClassEx.cbSize = sizeof(wndClassEx);
-				wndClassEx.style = CS_DROPSHADOW;
+				wndClassEx.style = NULL;
 				wndClassEx.lpfnWndProc = WindowProcedure;
 				wndClassEx.cbClsExtra = NULL;
 				wndClassEx.hInstance = GetModuleHandle(NULL);

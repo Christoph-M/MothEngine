@@ -1,6 +1,7 @@
-#include "include/Moth.Core/Application.h"
+#include "include\Moth.Core\Application.h"
 
-#include "include/Moth.Core/Window.h"
+#include "include\Moth.Core\Window.h"
+#include "include\Moth.Core\Interfaces\IScene.h"
 
 
 namespace Moth {
@@ -31,7 +32,9 @@ namespace Moth {
 		}
 
 
-		void Application::Run() {
+		void Application::Run(IScene* scene) {
+			scene->Begin();
+
 			while (running_) {
 				if (PeekMessage(&messages_, NULL, 0, 0, PM_REMOVE)) {
 					TranslateMessage(&messages_);
@@ -40,9 +43,18 @@ namespace Moth {
 					running_ = messages_.message != WM_QUIT;
 				}
 
+				scene->Update();
+
+				scene->Draw3D();
+				scene->Draw2D();
+
 				Sleep(1);
 			}
+
+			scene->End();
 		}
+
+		void Application::FacePlant() { DestroyWindow(Moth::Core::Window::Instance()->GetWindow()); }
 
 
 		Application::~Application() { }

@@ -6,5 +6,6 @@
 #ifdef MOTH_PREFIX
 
 #define MothCore ::Moth::Core
+#define MothMath ::Moth::Math
 
 #endif
