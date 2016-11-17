@@ -1,4 +1,6 @@
-#include "Window.h"
+#include "include/Moth.Core/Window.h"
+
+#include <cstdio>
 
 
 namespace Moth {
@@ -10,16 +12,16 @@ namespace Moth {
 				wndClassEx.lpfnWndProc = WindowProcedure;
 				wndClassEx.cbClsExtra = NULL;
 				wndClassEx.hInstance = GetModuleHandle(NULL);
-				wndClassEx.hIcon = (HICON)IDI_EXCLAMATION;
-				wndClassEx.hCursor = (HCURSOR)IDC_ARROW;
+				wndClassEx.hIcon = LoadIcon(0, IDI_EXCLAMATION);
+				wndClassEx.hCursor = LoadCursor(0, IDC_ARROW);
 				wndClassEx.hbrBackground = (HBRUSH)COLOR_WINDOW;
 				wndClassEx.lpszMenuName = NULL;
 				wndClassEx.lpszClassName = L"MothEngine";
-				wndClassEx.hIconSm = (HICON)IDI_EXCLAMATION;
+				wndClassEx.hIconSm = LoadIcon(0, IDI_EXCLAMATION);
 
 			if (!RegisterClassEx(&wndClassEx)) return false;
 
-			DWORD dStyle = WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
+			Moth_UInt32 dStyle = WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
 
 			hwnd_ = CreateWindowEx(0, wndClassEx.lpszClassName, L"Moth Engine", dStyle,
 								   CW_USEDEFAULT, CW_USEDEFAULT, 500, 200, HWND_DESKTOP, NULL, wndClassEx.hInstance, NULL);
@@ -30,6 +32,20 @@ namespace Moth {
 			this->RetrieveDimensions();
 
 			return true;
+		}
+
+		void Window::LastErrorToConsole() {
+			Moth_UInt32 error = GetLastError();
+			Moth_Char16 buffer[1024] = L"";
+			FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, NULL, error, NULL, buffer, 1024, NULL);
+			wprintf(L"%s", buffer);
+		}
+
+		void Window::LastErrorToMessageBox() {
+			Moth_UInt32 error = GetLastError();
+			Moth_Char16 buffer[1024] = L"";
+			FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, NULL, error, NULL, buffer, 1024, NULL);
+			MessageBox(nullptr, buffer, L"Error", MB_OK | MB_ICONERROR);
 		}
 
 		void Window::RetrieveDimensions() {
@@ -44,5 +60,7 @@ namespace Moth {
 			windowDescription_.width  = dim.right  - dim.left;
 			windowDescription_.height = dim.bottom - dim.top;
 		}
+
+		Window* Window::instance_ = 0;
 	}
 }

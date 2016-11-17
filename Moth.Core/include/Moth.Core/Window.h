@@ -2,6 +2,8 @@
 
 #include <Windows.h>
 
+#include "Moth.Core.Datatypes.h"
+
 
 namespace Moth {
 	namespace Core {
@@ -10,11 +12,14 @@ namespace Moth {
 		class Window {
 		public:
 			struct Description {
-				LONG x, y, right, bottom, width, height;
+				Moth_Int32 x, y, right, bottom, width, height;
 			};
 
 		public:
 			bool MakeWindow();
+
+			static void LastErrorToConsole();
+			static void LastErrorToMessageBox();
 
 			HWND GetWindow() { return hwnd_; }
 			const Description& GetDescription() { return windowDescription_; }

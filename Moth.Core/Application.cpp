@@ -1,6 +1,6 @@
-#include "Application.h"
+#include "include/Moth.Core/Application.h"
 
-#include "Window.h"
+#include "include/Moth.Core/Window.h"
 
 
 namespace Moth {
@@ -24,7 +24,11 @@ namespace Moth {
 		Application::Application() :
 			running_(true),
 			messages_({ 0 })
-		{ }
+		{
+			if (!Moth::Core::Window::Instance()->MakeWindow()) {
+				Moth::Core::Window::LastErrorToConsole();
+			}
+		}
 
 
 		void Application::Run() {
@@ -35,6 +39,8 @@ namespace Moth {
 
 					running_ = messages_.message != WM_QUIT;
 				}
+
+				Sleep(1);
 			}
 		}
 
