@@ -4,7 +4,6 @@
 #include <Moth.Math\Vector.h>
 
 #include <cstdio>
-#include <assert.h>
 
 #include "include\Fatherload\TestScene.h"
 
@@ -26,6 +25,8 @@ void main() {
 	assert((v1 == MothMath::FVector2 { 2, 2 }));
 	v1 /= v2;
 	assert((v1 == MothMath::FVector2 { 1, 1 }));
+
+	test();
 
 	app.Run(new Fatherload::TestScene());
 }
