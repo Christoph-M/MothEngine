@@ -60,11 +60,4 @@ typedef double Moth_Float64;
 
 
 
-
-//#define CHECK_TYPE(condition, size) (sizeof(condition) == size)
-//
-//void test()
-//{
-//	assert(CHECK_TYPE(float, 4));
-//	assert(CHECK_TYPE(double, 8));
-//}
+#define CHECK_TYPE(condition, size) (sizeof(condition) == size)

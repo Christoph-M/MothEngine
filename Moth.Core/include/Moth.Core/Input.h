@@ -9,6 +9,13 @@
 
 namespace Moth {
 	namespace Core {
+		enum EKeyState {
+			KeyPressed,
+			KeyDown,
+			KeyUp,
+			KeyToggled
+		};
+
 		class Input {
 		public:
 			void Subscribe(Moth_Int32, bool, class IObserverInput*);

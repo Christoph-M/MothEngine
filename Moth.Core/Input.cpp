@@ -31,16 +31,16 @@ namespace Moth {
 
 				if (keyState >= 0 && keyPressedLastCall_[input.first]) {
 					keyPressedLastCall_[input.first] = false;
-					for (Subscriber subscriber : input.second) subscriber.observer->OnInputUp(input.first);
+					for (Subscriber subscriber : input.second) subscriber.observer->OnInput(input.first, KeyUp);
 				} else if (keyState < 0 && !keyPressedLastCall_[input.first]) {
 					keyPressedLastCall_[input.first] = true;
-					for (Subscriber subscriber : input.second) subscriber.observer->OnInputDown(input.first);
+					for (Subscriber subscriber : input.second) subscriber.observer->OnInput(input.first, KeyDown);
 				} else if (keyState < 0)
-					for (Subscriber subscriber : input.second) subscriber.observer->OnInput(input.first);
+					for (Subscriber subscriber : input.second) subscriber.observer->OnInput(input.first, KeyPressed);
 				else if (keyState == 1)
 					for (Subscriber subscriber : input.second)
 						if (subscriber.onToggle)
-							subscriber.observer->OnInputToggle(input.first);
+							subscriber.observer->OnInput(input.first, KeyToggled);
 			}
 		}
 

@@ -27,8 +27,22 @@ namespace Moth {
 			running_(true),
 			messages_({ 0 })
 		{
+			assert(CHECK_TYPE(Moth_Int8, 1));
+			assert(CHECK_TYPE(Moth_Int16, 2));
+			assert(CHECK_TYPE(Moth_Int32, 4));
+			assert(CHECK_TYPE(Moth_Int64, 8));
+			assert(CHECK_TYPE(Moth_UInt8, 1));
+			assert(CHECK_TYPE(Moth_UInt16, 2));
+			assert(CHECK_TYPE(Moth_UInt32, 4));
+			assert(CHECK_TYPE(Moth_UInt64, 8));
+			assert(CHECK_TYPE(Moth_Char8, 1));
+			assert(CHECK_TYPE(Moth_Char16, 2));
+			assert(CHECK_TYPE(float, 4));
+			assert(CHECK_TYPE(double, 8));
+
 			if (!Window::Instance()->MakeWindow()) {
 				Window::LastErrorToConsole();
+				Window::LastErrorToMessageBox();
 			}
 			Input::Instance();
 		}
@@ -57,7 +71,7 @@ namespace Moth {
 			scene->End();
 		}
 
-		void Application::FacePlant() { DestroyWindow(Moth::Core::Window::Instance()->GetWindow()); }
+		void Application::FacePlant() { DestroyWindow(Window::Instance()->GetWindow()); }
 
 
 		Application::~Application() { }
