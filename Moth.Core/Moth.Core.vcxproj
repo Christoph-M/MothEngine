@@ -123,6 +123,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\Moth.Core\Application.h" />
+    <ClInclude Include="include\Moth.Core\Input.h" />
+    <ClInclude Include="include\Moth.Core\Interfaces\IObserver.h" />
     <ClInclude Include="include\Moth.Core\Interfaces\IScene.h" />
     <ClInclude Include="include\Moth.Core\Moth.Core.Datatypes.h" />
     <ClInclude Include="include\Moth.Core\Moth.Core.h" />
@@ -130,6 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

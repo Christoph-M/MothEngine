@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Window.h"
+#include "Input.h"
 #include "Application.h"
 
 #ifdef MOTH_PREFIX

@@ -26,7 +26,5 @@ void main() {
 	v1 /= v2;
 	assert((v1 == MothMath::FVector2 { 1, 1 }));
 
-	test();
-
 	app.Run(new Fatherload::TestScene());
 }

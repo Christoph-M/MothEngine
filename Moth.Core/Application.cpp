@@ -1,6 +1,7 @@
 #include "include\Moth.Core\Application.h"
 
 #include "include\Moth.Core\Window.h"
+#include "include\Moth.Core\Input.h"
 #include "include\Moth.Core\Interfaces\IScene.h"
 
 
@@ -26,9 +27,10 @@ namespace Moth {
 			running_(true),
 			messages_({ 0 })
 		{
-			if (!Moth::Core::Window::Instance()->MakeWindow()) {
-				Moth::Core::Window::LastErrorToConsole();
+			if (!Window::Instance()->MakeWindow()) {
+				Window::LastErrorToConsole();
 			}
+			Input::Instance();
 		}
 
 
@@ -43,6 +45,7 @@ namespace Moth {
 					running_ = messages_.message != WM_QUIT;
 				}
 
+				Input::Instance()->CheckInput();
 				scene->Update();
 
 				scene->Draw3D();
