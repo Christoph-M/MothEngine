@@ -4,7 +4,7 @@
 
 // *************************** Character ***************************
 typedef char	 Moth_Char8;
-typedef wchar_t  Moth_Char16;
+typedef wchar_t  Moth_WChar16;
 typedef char*	 Moth_CString;
 typedef wchar_t* Moth_WString;
 
@@ -12,7 +12,7 @@ typedef wchar_t* Moth_WString;
 	typedef Moth_Char8 Moth_Char;
 	typedef Moth_CString Moth_String;
 #else
-	typedef Moth_Char16 Moth_Char;
+	typedef Moth_WChar16 Moth_Char;
 	typedef Moth_WString Moth_String;
 #endif
 

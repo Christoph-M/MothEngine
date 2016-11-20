@@ -18,14 +18,14 @@ namespace Moth {
 
 		class Input {
 		public:
-			void Subscribe(Moth_Int32, bool, class IObserverInput*);
-			bool Unsubscribe(Moth_Int32, class IObserverInput*);
+			void Subscribe(Moth_Int32, bool, struct IObserverInput*);
+			bool Unsubscribe(Moth_Int32, struct IObserverInput*);
 
 			void CheckInput();
 
 		private:
 			struct Subscriber {
-				class IObserverInput* observer;
+				struct IObserverInput* observer;
 				bool onToggle;
 			};
 

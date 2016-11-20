@@ -25,8 +25,8 @@ namespace Fatherload {
 	}
 
 	void TestScene::End() {
-		MothCore::Input::Instance()->Unsubscribe('D', this);
-		MothCore::Input::Instance()->Unsubscribe('A', this);
+		assert(MothCore::Input::Instance()->Unsubscribe('D', this));
+		assert(MothCore::Input::Instance()->Unsubscribe('A', this));
 	}
 
 	void TestScene::OnInput(Moth_Int32 vKey, MothCore::EKeyState keyState) {

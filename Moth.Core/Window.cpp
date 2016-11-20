@@ -36,14 +36,14 @@ namespace Moth {
 
 		void Window::LastErrorToConsole() {
 			Moth_UInt32 error = GetLastError();
-			Moth_Char16 buffer[1024] = L"";
+			Moth_WChar16 buffer[1024] = L"";
 			FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, NULL, error, NULL, buffer, 1024, NULL);
 			wprintf(L"%s", buffer);
 		}
 
 		void Window::LastErrorToMessageBox() {
 			Moth_UInt32 error = GetLastError();
-			Moth_Char16 buffer[1024] = L"";
+			Moth_WChar16 buffer[1024] = L"";
 			FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, NULL, error, NULL, buffer, 1024, NULL);
 			MessageBox(nullptr, buffer, L"Error", MB_OK | MB_ICONERROR);
 		}

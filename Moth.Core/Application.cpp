@@ -36,9 +36,9 @@ namespace Moth {
 			assert(CHECK_TYPE(Moth_UInt32, 4));
 			assert(CHECK_TYPE(Moth_UInt64, 8));
 			assert(CHECK_TYPE(Moth_Char8, 1));
-			assert(CHECK_TYPE(Moth_Char16, 2));
-			assert(CHECK_TYPE(float, 4));
-			assert(CHECK_TYPE(double, 8));
+			assert(CHECK_TYPE(Moth_WChar16, 2));
+			assert(CHECK_TYPE(Moth_Float32, 4));
+			assert(CHECK_TYPE(Moth_Float64, 8));
 
 			if (!Window::Instance()->MakeWindow()) {
 				Window::LastErrorToConsole();
