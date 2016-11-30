@@ -7,19 +7,20 @@
 
 namespace Moth {
 	namespace Core {
+		static Application* g_AppHandle = nullptr;
+
 		LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) {
 			switch (message) {
 				case WM_CLOSE:
-					DestroyWindow(hwnd);
+					PostQuitMessage(0);
 					return 0;
-					break;
 				case WM_DESTROY:
 					PostQuitMessage(0);       /* send a WM_QUIT to the message queue */
-					break;
+					return 0;
 				default: break;
 			}
 
-			return DefWindowProc(hwnd, message, wParam, lParam);
+			return g_AppHandle->MessageHandler(hwnd, message, wParam, lParam);
 		}
 
 
@@ -40,13 +41,28 @@ namespace Moth {
 			assert(CHECK_TYPE(float, 4));
 			assert(CHECK_TYPE(double, 8));
 
+			if (!Window::Instance()) {
+				Window::LogToConsole(L"Window instance = nullptr");
+				Window::LogToMessageBox(L"Window instance = nullptr");
+			}
+			
 			if (!Window::Instance()->MakeWindow()) {
 				Window::LastErrorToConsole();
 				Window::LastErrorToMessageBox();
 			}
 			Input::Instance();
+
+			g_AppHandle = this;
 		}
 
+
+		LRESULT Application::MessageHandler(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) {
+			switch (message) {
+				default: break;
+			}
+
+			return DefWindowProc(hwnd, message, wParam, lParam);
+		}
 
 		void Application::Run(IScene* scene) {
 			scene->Begin();
@@ -55,23 +71,34 @@ namespace Moth {
 				if (PeekMessage(&messages_, NULL, 0, 0, PM_REMOVE)) {
 					TranslateMessage(&messages_);
 					DispatchMessage(&messages_);
-
-					running_ = messages_.message != WM_QUIT;
 				}
 
-				Input::Instance()->CheckInput();
-				scene->Update();
+				if (messages_.message == WM_QUIT || Input::GetKey(VK_ESCAPE)) {
+					running_ = false;
+				} else {
+					Input::Instance()->CheckInput();
+					scene->Update();
 
-				scene->Draw3D();
-				scene->Draw2D();
+					scene->Draw3D();
+					scene->Draw2D();
 
-				Sleep(1);
+					Sleep(1);
+				}
 			}
 
 			scene->End();
+
+			this->FacePlant();
 		}
 
-		void Application::FacePlant() { DestroyWindow(Window::Instance()->GetWindow()); }
+		void Application::FacePlant() {
+			if (!Window::Instance()->EndWindow()) {
+				Window::LastErrorToConsole();
+				Window::LastErrorToMessageBox();
+			}
+
+			g_AppHandle = nullptr;
+		}
 
 
 		Application::~Application() { }

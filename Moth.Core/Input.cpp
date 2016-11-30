@@ -25,6 +25,24 @@ namespace Moth {
 			return false;
 		}
 
+		bool Input::GetKeyDown(Moth_Int32 vKey) {
+			return GetKeyState(vKey) < 0 && !keyPressedLastCall_[vKey];
+		}
+
+		bool Input::GetKey(Moth_Int32 vKey) {
+			return GetKeyState(vKey) < 0;
+		}
+
+		bool Input::GetKeyUp(Moth_Int32 vKey) {
+			return GetKeyState(vKey) >= 0 && keyPressedLastCall_[vKey];
+		}
+
+		bool Input::GetKeyToggle(Moth_Int32 vKey) {
+			return GetKeyState(vKey) == 1;
+		}
+
+
+
 		void Input::CheckInput() {
 			for (auto input : inputEvents_) {
 				Moth_Int16 keyState = GetKeyState(input.first);

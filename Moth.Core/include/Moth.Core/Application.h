@@ -1,5 +1,6 @@
 #pragma once
 
+#define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 
 
@@ -11,7 +12,8 @@ namespace Moth {
 
 
 			void Run(struct IScene*);
-			void FacePlant();
+			LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
+			static void FacePlant();
 
 
 			~Application();

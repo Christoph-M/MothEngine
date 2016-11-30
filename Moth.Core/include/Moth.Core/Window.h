@@ -1,5 +1,6 @@
 #pragma once
 
+#define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 
 #include "Moth.Core.Datatypes.h"
@@ -17,18 +18,23 @@ namespace Moth {
 
 		public:
 			bool MakeWindow();
+			bool EndWindow();
 
 			static void LastErrorToConsole();
 			static void LastErrorToMessageBox();
+			static void LogToConsole(Moth_WString, bool brk = false);
+			static void LogToMessageBox(Moth_WString);
 
-			HWND GetWindow() { return hwnd_; }
-			const Description& GetDescription() { return windowDescription_; }
+			HWND GetWindow() const { return hwnd_; }
+			const Description& GetDescription() const { return windowDescription_; }
 
 		private:
 			void RetrieveDimensions();
 
 		private:
 			HWND hwnd_;
+			Moth_WString className_;
+			HINSTANCE hInstance_;
 
 			Description windowDescription_;
 
@@ -56,7 +62,7 @@ namespace Moth {
 			};
 
 		private:
-			Window() { };
+			Window() : hwnd_(NULL), className_(L""), hInstance_(NULL) { } ;
 			~Window() { };
 
 		private:

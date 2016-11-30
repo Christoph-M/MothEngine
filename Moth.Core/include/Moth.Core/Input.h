@@ -17,17 +17,25 @@ namespace Moth {
 		};
 
 		class Input {
+			friend class Application;
+
 		public:
 			void Subscribe(Moth_Int32, bool, class IObserverInput*);
 			bool Unsubscribe(Moth_Int32, class IObserverInput*);
 
-			void CheckInput();
+			bool GetKeyDown(Moth_Int32);
+			static bool GetKey(Moth_Int32);
+			bool GetKeyUp(Moth_Int32);
+			static bool GetKeyToggle(Moth_Int32);
 
 		private:
 			struct Subscriber {
 				class IObserverInput* observer;
 				bool onToggle;
 			};
+
+		private:
+			void CheckInput();
 
 		private:
 			std::map<Moth_Int32, std::list<Subscriber>> inputEvents_;

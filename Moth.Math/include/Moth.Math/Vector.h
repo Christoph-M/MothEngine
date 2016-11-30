@@ -13,14 +13,14 @@ namespace Moth {
 					T a[3];
 				};
 				
-				inline Vector Zero()	{ return Vector { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 0) } }
-				inline Vector One()		{ return Vector { static_cast<T>( 1), static_cast<T>( 1), static_cast<T>( 1) } }
-				inline Vector Up()		{ return Vector { static_cast<T>( 0), static_cast<T>( 1), static_cast<T>( 0) } }
-				inline Vector Down()	{ return Vector { static_cast<T>( 0), static_cast<T>(-1), static_cast<T>( 0) } }
-				inline Vector Right()	{ return Vector { static_cast<T>( 1), static_cast<T>( 0), static_cast<T>( 0) } }
-				inline Vector Left()	{ return Vector { static_cast<T>(-1), static_cast<T>( 0), static_cast<T>( 0) } }
-				inline Vector Forward() { return Vector { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 1) } }
-				inline Vector Back()	{ return Vector { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>(-1) } }
+				inline Vector Zero()	{ return Vector { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 0) }; }
+				inline Vector One()		{ return Vector { static_cast<T>( 1), static_cast<T>( 1), static_cast<T>( 1) }; }
+				inline Vector Up()		{ return Vector { static_cast<T>( 0), static_cast<T>( 1), static_cast<T>( 0) }; }
+				inline Vector Down()	{ return Vector { static_cast<T>( 0), static_cast<T>(-1), static_cast<T>( 0) }; }
+				inline Vector Right()	{ return Vector { static_cast<T>( 1), static_cast<T>( 0), static_cast<T>( 0) }; }
+				inline Vector Left()	{ return Vector { static_cast<T>(-1), static_cast<T>( 0), static_cast<T>( 0) }; }
+				inline Vector Forward() { return Vector { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 1) }; }
+				inline Vector Back()	{ return Vector { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>(-1) }; }
 
 				inline Vector Add(const Vector& b) { return Vector { this->v.x + b.v.x, this->v.y + b.v.y, this->v.z + b.v.z }; }
 				inline Vector Add(const T v)	   { return Vector { this->v.x + v,     this->v.y + v,     this->v.z + v	 }; }
@@ -85,12 +85,12 @@ namespace Moth {
 					T a[2];
 				};
 
-				inline Vector2 Zero()	{ return Vector2 { static_cast<T>( 0), static_cast<T>( 0) } }
-				inline Vector2 One()	{ return Vector2 { static_cast<T>( 1), static_cast<T>( 1) } }
-				inline Vector2 Up()		{ return Vector2 { static_cast<T>( 0), static_cast<T>( 1) } }
-				inline Vector2 Down()	{ return Vector2 { static_cast<T>( 0), static_cast<T>(-1) } }
-				inline Vector2 Right()	{ return Vector2 { static_cast<T>( 1), static_cast<T>( 0) } }
-				inline Vector2 Left()	{ return Vector2 { static_cast<T>(-1), static_cast<T>( 0) } }
+				inline Vector2 Zero()	{ return Vector2 { static_cast<T>( 0), static_cast<T>( 0) }; }
+				inline Vector2 One()	{ return Vector2 { static_cast<T>( 1), static_cast<T>( 1) }; }
+				inline Vector2 Up()		{ return Vector2 { static_cast<T>( 0), static_cast<T>( 1) }; }
+				inline Vector2 Down()	{ return Vector2 { static_cast<T>( 0), static_cast<T>(-1) }; }
+				inline Vector2 Right()	{ return Vector2 { static_cast<T>( 1), static_cast<T>( 0) }; }
+				inline Vector2 Left()	{ return Vector2 { static_cast<T>(-1), static_cast<T>( 0) }; }
 
 				inline Vector2 Add(const Vector2& b) { return Vector2 { this->v.x + b.v.x, this->v.y + b.v.y }; }
 				inline Vector2 Add(const T v)		 { return Vector2 { this->v.x + v,     this->v.y + v	 }; }
@@ -130,7 +130,7 @@ namespace Moth {
 				}
 
 				inline static Vector2 Lerp(const Vector2& start, const Vector2& end, T time) { return (start + (end - start) * time); }
-				inline static Vector2 NLerp(const Vector2& start, const Vector2& end, T time) { return Vector::Lerp(start, end, time).Normalize(); }
+				inline static Vector2 NLerp(const Vector2& start, const Vector2& end, T time) { return Vector2::Lerp(start, end, time).Normalize(); }
 				static Vector2 SLerp(const Vector2& start, const Vector2& end, T time) {
 					T dot = start.Dot(end);
 					Math<T>::Clamp(dot, static_cast<T>(-1), static_cast<T>(1));
