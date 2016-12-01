@@ -20,8 +20,8 @@ namespace Moth {
 			friend class Application;
 
 		public:
-			void Subscribe(Moth_Int32, bool, class IObserverInput*);
-			bool Unsubscribe(Moth_Int32, class IObserverInput*);
+			void Subscribe(Moth_Int32, bool, struct IObserverInput*);
+			bool Unsubscribe(Moth_Int32, struct IObserverInput*);
 
 			bool GetKeyDown(Moth_Int32);
 			static bool GetKey(Moth_Int32);
@@ -30,7 +30,7 @@ namespace Moth {
 
 		private:
 			struct Subscriber {
-				class IObserverInput* observer;
+				struct IObserverInput* observer;
 				bool onToggle;
 			};
 
