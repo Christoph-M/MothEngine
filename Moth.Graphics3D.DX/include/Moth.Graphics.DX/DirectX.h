@@ -10,6 +10,8 @@ namespace Moth {
 			public:
 				DirectX();
 
+				bool Initialize(Moth_Int32, Moth_Int32, HWND);
+
 				~DirectX();
 			};
 

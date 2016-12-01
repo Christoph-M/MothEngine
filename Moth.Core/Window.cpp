@@ -114,7 +114,7 @@ namespace Moth {
 		}
 
 		void Window::LogToMessageBox(Moth_WString buffer) {
-			Moth_Char16 b[1024] = L"";
+			Moth_WChar16 b[1024] = L"";
 			_snwprintf_s(b, 1024, L"%ws\n\nPress Yes to debug, No to continue.", buffer);
 			int result = MessageBox(nullptr, b, L"Notice", MB_YESNO | MB_DEFBUTTON1 | MB_ICONEXCLAMATION);
 		#ifdef _DEBUG
