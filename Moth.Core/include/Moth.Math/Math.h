@@ -2,11 +2,15 @@
 
 #include <cmath>
 
-#include "Moth.Core\Moth.Core.Datatypes.h"
+#include "..\Moth.Core\Moth.Core.Datatypes.h"
 
 
 namespace Moth {
 	namespace Math {
+	#define PI  3.14159265359f
+	#define TAU 6.28318530718f
+
+
 		template<class T>
 		struct Math {
 			inline static T Clamp(T value) { return Math<T>::Clamp(value, static_cast<T>(0), static_cast<T>(1)); }

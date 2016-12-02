@@ -10,9 +10,19 @@ namespace Moth {
 			public:
 				DirectX();
 
-				bool Initialize(Moth_Int32, Moth_Int32, HWND);
+
+				bool Initialize();
+				bool Shutdown();
+				bool RenderFrame();
+
 
 				~DirectX();
+				
+
+				DirectX(const DirectX&) = delete;
+
+			private:
+				class D3D* direct3D_;
 			};
 
 			inline Moth::Core::IGraphics3D* CreateGraphics3D() {

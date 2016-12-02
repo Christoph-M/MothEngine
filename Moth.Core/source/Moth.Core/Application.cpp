@@ -1,8 +1,8 @@
-#include "include\Moth.Core\Application.h"
+#include "..\..\include\Moth.Core\Application.h"
 
-#include "include\Moth.Core\Window.h"
-#include "include\Moth.Core\Input.h"
-#include "include\Moth.Core\Interfaces\IScene.h"
+#include "..\..\include\Moth.Core\Window.h"
+#include "..\..\include\Moth.Core\Input.h"
+#include "..\..\include\Moth.Core\Interfaces\IScene.h"
 
 
 namespace Moth {

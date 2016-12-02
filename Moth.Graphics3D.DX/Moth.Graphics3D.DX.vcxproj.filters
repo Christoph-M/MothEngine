@@ -18,9 +18,15 @@
     <ClInclude Include="include\Moth.Graphics.DX\DirectX.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Moth.Graphics.DX\D3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D3D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

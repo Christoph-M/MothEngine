@@ -13,48 +13,75 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Interfaces">
+    <Filter Include="Source Files\Moth.Core">
+      <UniqueIdentifier>{1d39eee0-d255-4a6a-b5c3-9e4fab984c91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Moth.Math">
+      <UniqueIdentifier>{ef0c03e3-c6b4-4e27-a4fd-fa06f066026e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Moth.Core">
+      <UniqueIdentifier>{58427613-9902-4c01-ac70-a2170b7c231f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Moth.Core\Interfaces">
       <UniqueIdentifier>{92ebb0dc-b034-4a74-a9af-05ebd457e90e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Moth.Math">
+      <UniqueIdentifier>{48d934ce-de94-4990-8b77-bc99f9ff91d4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Moth.Core\Moth.Core.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Moth.Core\Application.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Moth.Core\Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Moth.Core\Moth.Core.Datatypes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\Moth.Core\Interfaces\IScene.h">
-      <Filter>Header Files\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Moth.Core\Input.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Moth.Core\Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="include\Moth.Core\Interfaces\IObserver.h">
-      <Filter>Header Files\Interfaces</Filter>
+      <Filter>Header Files\Moth.Core\Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="include\Moth.Core\Interfaces\IGraphics3D.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\Moth.Core\Application.h">
+      <Filter>Header Files\Moth.Core</Filter>
     </ClInclude>
     <ClInclude Include="include\Moth.Core\GraphicsSettings.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Moth.Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Moth.Core\Interfaces\IGraphics3D.h">
+      <Filter>Header Files\Moth.Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Moth.Core\Input.h">
+      <Filter>Header Files\Moth.Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Moth.Core\Moth.Core.Datatypes.h">
+      <Filter>Header Files\Moth.Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Moth.Core\Moth.Core.h">
+      <Filter>Header Files\Moth.Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Moth.Core\Window.h">
+      <Filter>Header Files\Moth.Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Moth.Math\Math.h">
+      <Filter>Header Files\Moth.Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Moth.Math\Matrix.h">
+      <Filter>Header Files\Moth.Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Moth.Math\Moth.Math.h">
+      <Filter>Header Files\Moth.Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Moth.Math\Vector.h">
+      <Filter>Header Files\Moth.Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Window.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="source\Moth.Core\Application.cpp">
+      <Filter>Source Files\Moth.Core</Filter>
     </ClCompile>
-    <ClCompile Include="Application.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="source\Moth.Core\Input.cpp">
+      <Filter>Source Files\Moth.Core</Filter>
     </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="source\Moth.Core\Window.cpp">
+      <Filter>Source Files\Moth.Core</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Moth.Math\Matrix.cpp">
+      <Filter>Source Files\Moth.Math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

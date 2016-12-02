@@ -71,7 +71,7 @@ namespace Moth {
 				static Vector SLerp(const Vector& start, const Vector& end, T time) {
 					T dot = start.Dot(end);
 					Math<T>::Clamp(dot, static_cast<T>(-1), static_cast<T>(1));
-					T theta = acos(dot);
+					T theta = acos(dot) * time;
 					Vector relativeVec = end - start * dot;
 					relativeVec.Normalize();
 					return ((start * cos(theta) + (relativeVec * sin(theta))));
@@ -134,8 +134,85 @@ namespace Moth {
 				static Vector2 SLerp(const Vector2& start, const Vector2& end, T time) {
 					T dot = start.Dot(end);
 					Math<T>::Clamp(dot, static_cast<T>(-1), static_cast<T>(1));
-					T theta = acos(dot);
+					T theta = acos(dot) * time;
 					Vector2 relativeVec = end - start * dot;
+					relativeVec.Normalize();
+					return ((start * cos(theta) + (relativeVec * sin(theta))));
+				}
+			};
+			
+			template<class T>
+			struct Vector4 {
+				union {
+					struct { T x, y, z, w; } v;
+					T a[4];
+				};
+				
+				inline Vector4 Zero()	   { return Vector4 { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 0) }; }
+				inline Vector4 One()	   { return Vector4 { static_cast<T>( 1), static_cast<T>( 1), static_cast<T>( 1), static_cast<T>( 1) }; }
+				inline Vector4 Up()		   { return Vector4 { static_cast<T>( 0), static_cast<T>( 1), static_cast<T>( 0), static_cast<T>( 1) }; }
+				inline Vector4 Down()	   { return Vector4 { static_cast<T>( 0), static_cast<T>(-1), static_cast<T>( 0), static_cast<T>( 1) }; }
+				inline Vector4 Right()	   { return Vector4 { static_cast<T>( 1), static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 1) }; }
+				inline Vector4 Left()	   { return Vector4 { static_cast<T>(-1), static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 1) }; }
+				inline Vector4 Forward()   { return Vector4 { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 1), static_cast<T>( 1) }; }
+				inline Vector4 Back()	   { return Vector4 { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>(-1), static_cast<T>( 1) }; }
+				inline Vector4 PositiveW() { return Vector4 { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 1) }; }
+				inline Vector4 NegativeW() { return Vector4 { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 0), static_cast<T>(-1) }; }
+
+				inline Vector4 Add(const Vector4& b) { return Vector4 { this->v.x + b.v.x, this->v.y + b.v.y, this->v.z + b.v.z, this->v.w + b.v.w }; }
+				inline Vector4 Add(const T v)		 { return Vector4 { this->v.x + v,     this->v.y + v,     this->v.z + v,	 this->v.w + v	   }; }
+				inline Vector4 Sub(const Vector4& b) { return Vector4 { this->v.x - b.v.x, this->v.y - b.v.y, this->v.z - b.v.z, this->v.w - b.v.w }; }
+				inline Vector4 Sub(const T v)		 { return Vector4 { this->v.x - v,     this->v.y - v,     this->v.z - v,	 this->v.w - v	   }; }
+				inline Vector4 Mul(const Vector4& b) { return Vector4 { this->v.x * b.v.x, this->v.y * b.v.y, this->v.z * b.v.z, this->v.w * b.v.w }; }
+				inline Vector4 Mul(const T v)		 { return Vector4 { this->v.x * v,     this->v.y * v,     this->v.z * v,	 this->v.w * v	   }; }
+				inline Vector4 Div(const Vector4& b) { return Vector4 { this->v.x / b.v.x, this->v.y / b.v.y, this->v.z / b.v.z, this->v.w / b.v.w }; }
+				inline Vector4 Div(const T v)		 { return Vector4 { this->v.x / v,	   this->v.y / v,     this->v.z / v,	 this->v.w / v	   }; }
+
+				inline Vector4  operator+(const Vector4& b)  { return this->Add(b); }
+				inline Vector4& operator+=(const Vector4& b) { *this = *this + b; return *this; }
+				inline Vector4  operator+(const T v)		 { return this->Add(v); }
+				inline Vector4& operator+=(const T v)		 { *this = *this + v; return *this; }
+				inline Vector4  operator-(const Vector4& b)  { return this->Sub(b); }
+				inline Vector4& operator-=(const Vector4& b) { *this = *this - b; return *this; }
+				inline Vector4  operator-(const T v)		 { return this->Sub(v); }
+				inline Vector4& operator-=(const T v)		 { *this = *this - v; return *this; }
+				inline Vector4  operator*(const Vector4& b)  { return this->Mul(b); }
+				inline Vector4& operator*=(const Vector4& b) { *this = *this * b; return *this; }
+				inline Vector4  operator*(const T v)		 { return this->Mul(v); }
+				inline Vector4& operator*=(const T v)		 { *this = *this * v; return *this; }
+				inline Vector4  operator/(const Vector4& b)  { return this->Div(b); }
+				inline Vector4& operator/=(const Vector4& b) { *this = *this / b; return *this; }
+				inline Vector4  operator/(const T v)		 { return this->Div(v); }
+				inline Vector4& operator/=(const T v)		 { *this = *this / v; return *this; }
+				inline bool operator==(const Vector4& b) { return (this->v.x == b.v.x) && (this->v.y == b.v.y) && (this->v.z == b.v.z) && (this->v.w == b.v.w); }
+				inline bool operator!=(const Vector4& b) { return (this->v.x != b.v.x) || (this->v.y != b.v.y) || (this->v.z != b.v.z) || (this->v.w != b.v.w); }
+
+				inline T Dot(const Vector4& b) { return (this->v.x * b.v.x + this->v.y * b.v.y + this->v.z * b.v.z + this->v.w * b.v.w); }
+				inline Vector<T> Cross3r3(const Vector<T>& b) {
+					return Vector4 {
+						this->v.y * b.v.z - this->v.z * b.v.y,
+						this->v.z * b.v.x - this->v.x * b.v.z,
+						this->v.x * b.v.y - this->v.y * b.v.x
+					};
+				}
+				inline Vector<T> Cross3r3(const Vector4& b) { return this->Cross3r3(Vector<T> { b.v.x, b.v.y, b.v.z }); }
+				inline Vector4 Cross3r4(const Vector<T>& b)	{ return Vector4 { this->Cross3r3(b), static_cast<T>(1) }; }
+				inline Vector4 Cross3r4(const Vector4& b)	{ return Vector4 { this->Cross3r3(b), static_cast<T>(1) }; }
+
+				inline T Distance(const Vector4& b) { return (*this - b).Length(); }
+				inline T Length() { return sqrt(this->v.x * this->v.x + this->v.y * this->v.y + this->v.z * this->v.z + this->v.w * this->v.w); }
+				inline Vector4 Normalize() {
+					*this /= this->Length();
+					return *this;
+				}
+
+				inline static Vector4 Lerp(const Vector4& start, const Vector4& end, T time) { return (start + (end - start) * time); }
+				inline static Vector4 NLerp(const Vector4& start, const Vector4& end, T time) { return Vector4::Lerp(start, end, time).Normalize(); }
+				static Vector4 SLerp(const Vector4& start, const Vector4& end, T time) {
+					T dot = start.Dot(end);
+					Math<T>::Clamp(dot, static_cast<T>(-1), static_cast<T>(1));
+					T theta = acos(dot) * time;
+					Vector4 relativeVec = end - start * dot;
 					relativeVec.Normalize();
 					return ((start * cos(theta) + (relativeVec * sin(theta))));
 				}
@@ -155,5 +232,12 @@ namespace Moth {
 		typedef Vector::Vector2<Moth_Int16>   SVector2;
 		typedef Vector::Vector2<Moth_Int32>   IVector2;
 		typedef Vector::Vector2<Moth_Int64>   LVector2;
+		
+		typedef Vector::Vector4<Moth_Float32> FVector4;
+		typedef Vector::Vector4<Moth_Float64> DVector4;
+		typedef Vector::Vector4<Moth_Int8>    CVector4;
+		typedef Vector::Vector4<Moth_Int16>   SVector4;
+		typedef Vector::Vector4<Moth_Int32>   IVector4;
+		typedef Vector::Vector4<Moth_Int64>   LVector4;
 	}
 }

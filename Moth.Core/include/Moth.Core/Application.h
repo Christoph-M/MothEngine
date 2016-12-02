@@ -18,6 +18,9 @@ namespace Moth {
 
 			~Application();
 
+
+			Application(const Application&) = delete;
+
 		private:
 			bool running_;
 			MSG messages_;

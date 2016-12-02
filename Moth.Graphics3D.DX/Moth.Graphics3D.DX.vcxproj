@@ -58,25 +58,21 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="Props\Moth_Core.props" />
-    <Import Project="Props\Moth_Math.props" />
     <Import Project="Props\Output_Fatherload.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="Props\Moth_Core.props" />
-    <Import Project="Props\Moth_Math.props" />
     <Import Project="Props\Output_Fatherload.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="Props\Moth_Core.props" />
-    <Import Project="Props\Moth_Math.props" />
     <Import Project="Props\Output_Fatherload.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="Props\Moth_Core.props" />
-    <Import Project="Props\Moth_Math.props" />
     <Import Project="Props\Output_Fatherload.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -145,9 +141,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\Moth.Graphics.DX\D3D.h" />
     <ClInclude Include="include\Moth.Graphics.DX\DirectX.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="D3D.cpp" />
     <ClCompile Include="DirectX.cpp" />
   </ItemGroup>
   <ItemGroup>

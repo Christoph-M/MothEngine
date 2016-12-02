@@ -1,6 +1,6 @@
-#include "include\Moth.Core\Input.h"
+#include "..\..\include\Moth.Core\Input.h"
 
-#include "include\Moth.Core\Interfaces\IObserver.h"
+#include "..\..\include\Moth.Core\Interfaces\IObserver.h"
 
 
 namespace Moth {

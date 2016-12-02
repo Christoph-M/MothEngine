@@ -23,7 +23,7 @@ namespace Moth {
 			static void LastErrorToConsole();
 			static void LastErrorToMessageBox();
 			static void LogToConsole(Moth_WString, bool brk = false);
-			static void LogToMessageBox(Moth_WString);
+			static void LogToMessageBox(Moth_WString, Moth_WString title = L"Notice", Moth_Int32 style = MB_DEFBUTTON1 | MB_ICONEXCLAMATION);
 
 			HWND GetWindow() const { return hwnd_; }
 			const Description& GetDescription() const { return windowDescription_; }
