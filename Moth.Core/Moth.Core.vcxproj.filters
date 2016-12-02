@@ -80,8 +80,5 @@
     <ClCompile Include="source\Moth.Core\Window.cpp">
       <Filter>Source Files\Moth.Core</Filter>
     </ClCompile>
-    <ClCompile Include="source\Moth.Math\Matrix.cpp">
-      <Filter>Source Files\Moth.Math</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

@@ -13,14 +13,14 @@ namespace Moth {
 					T a[3];
 				};
 				
-				inline Vector Zero()	{ return Vector { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 0) }; }
-				inline Vector One()		{ return Vector { static_cast<T>( 1), static_cast<T>( 1), static_cast<T>( 1) }; }
-				inline Vector Up()		{ return Vector { static_cast<T>( 0), static_cast<T>( 1), static_cast<T>( 0) }; }
-				inline Vector Down()	{ return Vector { static_cast<T>( 0), static_cast<T>(-1), static_cast<T>( 0) }; }
-				inline Vector Right()	{ return Vector { static_cast<T>( 1), static_cast<T>( 0), static_cast<T>( 0) }; }
-				inline Vector Left()	{ return Vector { static_cast<T>(-1), static_cast<T>( 0), static_cast<T>( 0) }; }
-				inline Vector Forward() { return Vector { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 1) }; }
-				inline Vector Back()	{ return Vector { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>(-1) }; }
+				inline static Vector Zero()	   { return Vector { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 0) }; }
+				inline static Vector One()	   { return Vector { static_cast<T>( 1), static_cast<T>( 1), static_cast<T>( 1) }; }
+				inline static Vector Up()	   { return Vector { static_cast<T>( 0), static_cast<T>( 1), static_cast<T>( 0) }; }
+				inline static Vector Down()	   { return Vector { static_cast<T>( 0), static_cast<T>(-1), static_cast<T>( 0) }; }
+				inline static Vector Right()   { return Vector { static_cast<T>( 1), static_cast<T>( 0), static_cast<T>( 0) }; }
+				inline static Vector Left()	   { return Vector { static_cast<T>(-1), static_cast<T>( 0), static_cast<T>( 0) }; }
+				inline static Vector Forward() { return Vector { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 1) }; }
+				inline static Vector Back()	   { return Vector { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>(-1) }; }
 
 				inline Vector Add(const Vector& b) { return Vector { this->v.x + b.v.x, this->v.y + b.v.y, this->v.z + b.v.z }; }
 				inline Vector Add(const T v)	   { return Vector { this->v.x + v,     this->v.y + v,     this->v.z + v	 }; }
@@ -50,7 +50,10 @@ namespace Moth {
 				inline bool operator==(const Vector& b) { return (this->v.x == b.v.x) && (this->v.y == b.v.y) && (this->v.z == b.v.z); }
 				inline bool operator!=(const Vector& b) { return (this->v.x != b.v.x) || (this->v.y != b.v.y) || (this->v.z != b.v.z); }
 
+				inline T operator[](size_t pos) { return this->a[pos]; }
+
 				inline T Dot(const Vector& b) { return (this->v.x * b.v.x + this->v.y * b.v.y + this->v.z * b.v.z); }
+				inline static T Dot(const Vector& a, const Vector& b) { return (a.v.x * b.v.x + a.v.y * b.v.y + a.v.z * b.v.z); }
 				inline Vector Cross(const Vector& b) {
 					return Vector {
 						this->v.y * b.v.z - this->v.z * b.v.y,
@@ -85,12 +88,12 @@ namespace Moth {
 					T a[2];
 				};
 
-				inline Vector2 Zero()	{ return Vector2 { static_cast<T>( 0), static_cast<T>( 0) }; }
-				inline Vector2 One()	{ return Vector2 { static_cast<T>( 1), static_cast<T>( 1) }; }
-				inline Vector2 Up()		{ return Vector2 { static_cast<T>( 0), static_cast<T>( 1) }; }
-				inline Vector2 Down()	{ return Vector2 { static_cast<T>( 0), static_cast<T>(-1) }; }
-				inline Vector2 Right()	{ return Vector2 { static_cast<T>( 1), static_cast<T>( 0) }; }
-				inline Vector2 Left()	{ return Vector2 { static_cast<T>(-1), static_cast<T>( 0) }; }
+				inline static Vector2 Zero()  { return Vector2 { static_cast<T>( 0), static_cast<T>( 0) }; }
+				inline static Vector2 One()	  { return Vector2 { static_cast<T>( 1), static_cast<T>( 1) }; }
+				inline static Vector2 Up()	  { return Vector2 { static_cast<T>( 0), static_cast<T>( 1) }; }
+				inline static Vector2 Down()  { return Vector2 { static_cast<T>( 0), static_cast<T>(-1) }; }
+				inline static Vector2 Right() { return Vector2 { static_cast<T>( 1), static_cast<T>( 0) }; }
+				inline static Vector2 Left()  { return Vector2 { static_cast<T>(-1), static_cast<T>( 0) }; }
 
 				inline Vector2 Add(const Vector2& b) { return Vector2 { this->v.x + b.v.x, this->v.y + b.v.y }; }
 				inline Vector2 Add(const T v)		 { return Vector2 { this->v.x + v,     this->v.y + v	 }; }
@@ -120,7 +123,10 @@ namespace Moth {
 				inline bool operator==(const Vector2& b) { return (this->v.x == b.v.x) && (this->v.y == b.v.y); }
 				inline bool operator!=(const Vector2& b) { return (this->v.x != b.v.x) || (this->v.y != b.v.y); }
 
+				inline T operator[](size_t pos) { return this->a[pos]; }
+
 				inline T Dot(const Vector2& b) { return (this->v.x * b.v.x + this->v.y * b.v.y); }
+				inline static T Dot(const Vector2& a, const Vector2& b) { return (a.v.x * b.v.x + a.v.y * b.v.y); }
 				
 				inline T Distance(const Vector2& b) { return (*this - b).Length(); }
 				inline T Length() { return sqrt(this->v.x * this->v.x + this->v.y * this->v.y); }
@@ -148,16 +154,16 @@ namespace Moth {
 					T a[4];
 				};
 				
-				inline Vector4 Zero()	   { return Vector4 { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 0) }; }
-				inline Vector4 One()	   { return Vector4 { static_cast<T>( 1), static_cast<T>( 1), static_cast<T>( 1), static_cast<T>( 1) }; }
-				inline Vector4 Up()		   { return Vector4 { static_cast<T>( 0), static_cast<T>( 1), static_cast<T>( 0), static_cast<T>( 1) }; }
-				inline Vector4 Down()	   { return Vector4 { static_cast<T>( 0), static_cast<T>(-1), static_cast<T>( 0), static_cast<T>( 1) }; }
-				inline Vector4 Right()	   { return Vector4 { static_cast<T>( 1), static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 1) }; }
-				inline Vector4 Left()	   { return Vector4 { static_cast<T>(-1), static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 1) }; }
-				inline Vector4 Forward()   { return Vector4 { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 1), static_cast<T>( 1) }; }
-				inline Vector4 Back()	   { return Vector4 { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>(-1), static_cast<T>( 1) }; }
-				inline Vector4 PositiveW() { return Vector4 { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 1) }; }
-				inline Vector4 NegativeW() { return Vector4 { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 0), static_cast<T>(-1) }; }
+				inline static Vector4 Zero()	  { return Vector4 { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 0) }; }
+				inline static Vector4 One()		  { return Vector4 { static_cast<T>( 1), static_cast<T>( 1), static_cast<T>( 1), static_cast<T>( 1) }; }
+				inline static Vector4 Up()		  { return Vector4 { static_cast<T>( 0), static_cast<T>( 1), static_cast<T>( 0), static_cast<T>( 1) }; }
+				inline static Vector4 Down()	  { return Vector4 { static_cast<T>( 0), static_cast<T>(-1), static_cast<T>( 0), static_cast<T>( 1) }; }
+				inline static Vector4 Right()	  { return Vector4 { static_cast<T>( 1), static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 1) }; }
+				inline static Vector4 Left()	  { return Vector4 { static_cast<T>(-1), static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 1) }; }
+				inline static Vector4 Forward()   { return Vector4 { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 1), static_cast<T>( 1) }; }
+				inline static Vector4 Back()	  { return Vector4 { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>(-1), static_cast<T>( 1) }; }
+				inline static Vector4 PositiveW() { return Vector4 { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 1) }; }
+				inline static Vector4 NegativeW() { return Vector4 { static_cast<T>( 0), static_cast<T>( 0), static_cast<T>( 0), static_cast<T>(-1) }; }
 
 				inline Vector4 Add(const Vector4& b) { return Vector4 { this->v.x + b.v.x, this->v.y + b.v.y, this->v.z + b.v.z, this->v.w + b.v.w }; }
 				inline Vector4 Add(const T v)		 { return Vector4 { this->v.x + v,     this->v.y + v,     this->v.z + v,	 this->v.w + v	   }; }
@@ -187,7 +193,11 @@ namespace Moth {
 				inline bool operator==(const Vector4& b) { return (this->v.x == b.v.x) && (this->v.y == b.v.y) && (this->v.z == b.v.z) && (this->v.w == b.v.w); }
 				inline bool operator!=(const Vector4& b) { return (this->v.x != b.v.x) || (this->v.y != b.v.y) || (this->v.z != b.v.z) || (this->v.w != b.v.w); }
 
+				inline T operator[](size_t pos) { return this->a[pos]; }
+
 				inline T Dot(const Vector4& b) { return (this->v.x * b.v.x + this->v.y * b.v.y + this->v.z * b.v.z + this->v.w * b.v.w); }
+				inline static T Dot(const Vector4& a, const Vector4& b) { return (a.v.x * b.v.x + a.v.y * b.v.y + a.v.z * b.v.z + a.v.w * b.v.w); }
+				inline static T Dot(T ax, T ay, T az, T aw, T bx, T by, T bz, T bw) { return (ax * bx + ay * by + az * bz + aw * bw); }
 				inline Vector<T> Cross3r3(const Vector<T>& b) {
 					return Vector4 {
 						this->v.y * b.v.z - this->v.z * b.v.y,

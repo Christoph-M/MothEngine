@@ -30,13 +30,13 @@ namespace Moth {
 
 				const ID3D11Device* Device() const { return device_; }
 				const ID3D11DeviceContext* DeviceContext() const { return deviceContext_; }
-				Moth::Math::Matrix ModelMatrix() const { return modelMatrix_; }
-				Moth::Math::Matrix OrthoMatrix() const { return orthoMatrix_; }
-				Moth::Math::Matrix ProjectionMatrix() const { return projectionMatrix_; }
+				Moth::Math::FMatrix ModelMatrix() const { return modelMatrix_; }
+				Moth::Math::FMatrix OrthoMatrix() const { return orthoMatrix_; }
+				Moth::Math::FMatrix ProjectionMatrix() const { return projectionMatrix_; }
 				const AdapterDescription& GetAdapterDescription() const { return adapterDescription_; }
 
-				bool StartDraw(const Moth::Math::FVector4&);
-				bool EndDraw();
+				bool StartDraw(const Moth::Math::FVector4&) const;
+				bool EndDraw() const;
 
 				bool ShutDown();
 
@@ -60,9 +60,9 @@ namespace Moth {
 				ID3D11DepthStencilState* depthStencilState_;
 				ID3D11DepthStencilView* depthStencilView_;
 				ID3D11RasterizerState* rasterizerState_;
-				Moth::Math::Matrix modelMatrix_;
-				Moth::Math::Matrix orthoMatrix_;
-				Moth::Math::Matrix projectionMatrix_;
+				Moth::Math::FMatrix modelMatrix_;
+				Moth::Math::FMatrix orthoMatrix_;
+				Moth::Math::FMatrix projectionMatrix_;
 			};
 		}
 	}

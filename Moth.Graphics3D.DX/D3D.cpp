@@ -19,9 +19,9 @@ namespace Moth {
 				depthStencilState_(nullptr),
 				depthStencilView_(nullptr),
 				rasterizerState_(nullptr),
-				modelMatrix_(),
-				orthoMatrix_(),
-				projectionMatrix_()
+				modelMatrix_(Moth::Math::FMatrix::Identity()),
+				orthoMatrix_(Moth::Math::FMatrix::Identity()),
+				projectionMatrix_(Moth::Math::FMatrix::Identity())
 			{ }
 
 
@@ -47,14 +47,14 @@ namespace Moth {
 				return true;
 			}
 
-			bool D3D::StartDraw(const Moth::Math::FVector4& clearColor) {
+			bool D3D::StartDraw(const Moth::Math::FVector4& clearColor) const {
 				deviceContext_->ClearRenderTargetView(renderTargetView_, clearColor.a);
 				deviceContext_->ClearDepthStencilView(depthStencilView_, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
 				return true;
 			}
 
-			bool D3D::EndDraw() {
+			bool D3D::EndDraw() const {
 				if (adapterDescription_.vSyncEnabled) swapChain_->Present(1, 0);
 				else								  swapChain_->Present(0, 0);
 
@@ -325,7 +325,7 @@ namespace Moth {
 			void D3D::CreateMVPMatricies() {
 				D3D11_VIEWPORT viewport;
 				Moth_Float32 fieldOfView = 0.0f, aspectRatio = 0.0f;
-				DirectX::XMFLOAT4X4 modelMatrix, orthoMatrix, projectionMatrix;
+				DirectX::XMFLOAT4X4 orthoMatrix, projectionMatrix;
 
 				Moth::Core::Window::Description windowDescription = Moth::Core::Window::Instance()->GetDescription();
 
@@ -341,11 +341,18 @@ namespace Moth {
 				fieldOfView = PI / 4.0f;
 				aspectRatio = viewport.Width / viewport.Height;
 
-				// TODO: Initialize MVP Matricies
+				DirectX::XMStoreFloat4x4(&orthoMatrix, DirectX::XMMatrixTranspose(DirectX::XMMatrixOrthographicLH(viewport.Width, viewport.Height, SCREEN_NEAR, SCREEN_DEPTH)));
+				DirectX::XMStoreFloat4x4(&projectionMatrix, DirectX::XMMatrixTranspose(DirectX::XMMatrixPerspectiveFovLH(fieldOfView, aspectRatio, SCREEN_NEAR, SCREEN_DEPTH)));
 
-				DirectX::XMStoreFloat4x4(&modelMatrix, DirectX::XMMatrixIdentity());
-				DirectX::XMStoreFloat4x4(&orthoMatrix, DirectX::XMMatrixOrthographicLH(viewport.Width, viewport.Height, SCREEN_NEAR, SCREEN_DEPTH));
-				DirectX::XMStoreFloat4x4(&projectionMatrix, DirectX::XMMatrixPerspectiveFovLH(fieldOfView, aspectRatio, SCREEN_NEAR, SCREEN_DEPTH));
+				orthoMatrix_ = Moth::Math::FMatrix(orthoMatrix.m[0][0], orthoMatrix.m[0][1], orthoMatrix.m[0][2], orthoMatrix.m[0][3],
+												   orthoMatrix.m[1][0], orthoMatrix.m[1][1], orthoMatrix.m[1][2], orthoMatrix.m[1][3],
+												   orthoMatrix.m[2][0], orthoMatrix.m[2][1], orthoMatrix.m[2][2], orthoMatrix.m[2][3],
+												   orthoMatrix.m[3][0], orthoMatrix.m[3][1], orthoMatrix.m[3][2], orthoMatrix.m[3][3]);
+
+				projectionMatrix_ = Moth::Math::FMatrix(projectionMatrix.m[0][0], projectionMatrix.m[0][1], projectionMatrix.m[0][2], projectionMatrix.m[0][3],
+														projectionMatrix.m[1][0], projectionMatrix.m[1][1], projectionMatrix.m[1][2], projectionMatrix.m[1][3],
+														projectionMatrix.m[2][0], projectionMatrix.m[2][1], projectionMatrix.m[2][2], projectionMatrix.m[2][3],
+														projectionMatrix.m[3][0], projectionMatrix.m[3][1], projectionMatrix.m[3][2], projectionMatrix.m[3][3]);
 			}
 
 
