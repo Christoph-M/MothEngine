@@ -7,6 +7,11 @@ namespace Moth {
 	namespace Math {
 		namespace Vector {
 			template<class T>
+			struct Vector2;
+			template<class T>
+			struct Vector4;
+
+			template<class T>
 			struct Vector {
 				union {
 					struct { T x, y, z; } v;
@@ -53,7 +58,10 @@ namespace Moth {
 				inline T operator[](size_t pos) { return this->a[pos]; }
 
 				inline T Dot(const Vector& b) { return (this->v.x * b.v.x + this->v.y * b.v.y + this->v.z * b.v.z); }
-				inline static T Dot(const Vector& a, const Vector& b) { return (a.v.x * b.v.x + a.v.y * b.v.y + a.v.z * b.v.z); }
+				inline T Dot(const Vector2<T>& b) { return (this->v.x * b.v.x + this->v.y * b.v.y); }
+				inline static T Dot(const Vector& a, const Vector& b)	  { return (a.v.x * b.v.x + a.v.y * b.v.y + a.v.z * b.v.z); }
+				inline static T Dot(const Vector& a, const Vector2<T>& b) { return (a.v.x * b.v.x + a.v.y * b.v.y); }
+				inline static T Dot(T ax, T ay, T az, T bx, T by, T bz) { return (ax * bx + ay * by + az * bz); }
 				inline Vector Cross(const Vector& b) {
 					return Vector {
 						this->v.y * b.v.z - this->v.z * b.v.y,
@@ -61,13 +69,11 @@ namespace Moth {
 						this->v.x * b.v.y - this->v.y * b.v.x
 					};
 				}
+				inline Vector Cross(const Vector2<T>& b) { return Vector{ -(this->v.z * b.v.y), this->v.z * b.v.x, this->v.x * b.v.y - this->v.y * b.v.x }; }
 
 				inline T Distance(const Vector& b) { return (*this - b).Length(); }
 				inline T Length() { return sqrt(this->v.x * this->v.x + this->v.y * this->v.y + this->v.z * this->v.z); }
-				inline Vector Normalize() {
-					*this /= this->Length();
-					return *this;
-				}
+				inline Vector Normalize() { *this /= this->Length(); return *this; }
 
 				inline static Vector Lerp(const Vector& start, const Vector& end, T time) { return (start + (end - start) * time); }
 				inline static Vector NLerp(const Vector& start, const Vector& end, T time) { return Vector::Lerp(start, end, time).Normalize(); }
@@ -127,6 +133,7 @@ namespace Moth {
 
 				inline T Dot(const Vector2& b) { return (this->v.x * b.v.x + this->v.y * b.v.y); }
 				inline static T Dot(const Vector2& a, const Vector2& b) { return (a.v.x * b.v.x + a.v.y * b.v.y); }
+				inline static T Dot(T ax, T ay, T bx, T by) { return (ax * bx + ay * by); }
 				
 				inline T Distance(const Vector2& b) { return (*this - b).Length(); }
 				inline T Length() { return sqrt(this->v.x * this->v.x + this->v.y * this->v.y); }

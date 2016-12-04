@@ -155,7 +155,7 @@ namespace Moth {
 				adapterOutput->Release();
 				adapterOutput = nullptr;
 
-				for (Moth_Int32 i = 0; i < numModes; ++i) {
+				for (Moth_UInt32 i = 0; i < numModes; ++i) {
 					if (displayModeList[i].Width == static_cast<Moth_UInt32>(windowDescription.width)) {
 						if (displayModeList[i].Height == static_cast<Moth_UInt32>(windowDescription.height)) {
 							adapterDescription_.numerator = displayModeList[i].RefreshRate.Numerator;
