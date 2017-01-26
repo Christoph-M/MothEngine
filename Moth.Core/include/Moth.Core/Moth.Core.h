@@ -10,3 +10,9 @@
 #define MothMath ::Moth::Math
 
 #endif
+
+#ifdef MOTH_LIB_EXPORT
+	#define MOTHLIB __declspec(dllexport)
+#else
+	#define MOTHLIB __declspec(dllimport)
+#endif

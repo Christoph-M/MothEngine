@@ -41,12 +41,12 @@ namespace Moth {
 			assert(CHECK_TYPE(Moth_Float32, 4));
 			assert(CHECK_TYPE(Moth_Float64, 8));
 
-			if (!Window::Instance()) {
+			if (!Window::InstancePtr()) {
 				Window::LogToConsole(L"Window instance = nullptr");
 				Window::LogToMessageBox(L"Window instance = nullptr");
 			}
 			
-			if (!Window::Instance()->MakeWindow()) {
+			if (!Window::Instance().MakeWindow()) {
 				Window::LastErrorToConsole();
 				Window::LastErrorToMessageBox();
 			}
@@ -65,6 +65,13 @@ namespace Moth {
 		}
 
 		void Application::Run(IScene* scene) {
+			HMODULE graphics3DModule = LoadLibrary(L".\\data\\modules\\Moth.Graphics3D.DX.dll");
+			ALLOCATE_GRAPHICS3D CreateGraphics3D = reinterpret_cast<ALLOCATE_GRAPHICS3D>(GetProcAddress(graphics3DModule, "CreateGraphics3D"));
+			RELEASE_GRAPHICS3D ReleaseGraphics3D = reinterpret_cast<RELEASE_GRAPHICS3D>(GetProcAddress(graphics3DModule, "ReleaseGraphics3D"));
+			Moth::Core::IGraphics3D* graphics3D = CreateGraphics3D();
+
+			graphics3D->Initialize(Window::InstancePtr());
+
 			scene->Begin();
 
 			while (running_) {
@@ -79,7 +86,7 @@ namespace Moth {
 					Input::Instance()->CheckInput();
 					scene->Update();
 
-					scene->Draw3D();
+					scene->Draw3D(graphics3D);
 					scene->Draw2D();
 
 					Sleep(1);
@@ -88,11 +95,15 @@ namespace Moth {
 
 			scene->End();
 
+			graphics3D->Shutdown();
+
+			ReleaseGraphics3D(graphics3D);
+
 			this->FacePlant();
 		}
 
 		void Application::FacePlant() {
-			if (!Window::Instance()->EndWindow()) {
+			if (!Window::Instance().EndWindow()) {
 				Window::LastErrorToConsole();
 				Window::LastErrorToMessageBox();
 			}

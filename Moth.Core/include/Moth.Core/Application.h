@@ -2,6 +2,7 @@
 
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
+#include "Interfaces\IGraphics3D.h"
 
 
 namespace Moth {
@@ -25,5 +26,8 @@ namespace Moth {
 			bool running_;
 			MSG messages_;
 		};
+
+		typedef Moth::Core::IGraphics3D* (*ALLOCATE_GRAPHICS3D)();
+		typedef void (*RELEASE_GRAPHICS3D)(Moth::Core::IGraphics3D*);
 	}
 }

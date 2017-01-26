@@ -10,7 +10,7 @@ namespace Fatherload {
 		void Begin();
 		void Update();
 		void Draw2D();
-		void Draw3D();
+		virtual void Draw3D(Moth::Core::IGraphics3D*) override;
 		void End();
 		void OnInput(Moth_Int32, Moth::Core::EKeyState);
 	};

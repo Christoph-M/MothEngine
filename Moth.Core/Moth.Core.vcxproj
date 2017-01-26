@@ -126,6 +126,7 @@
     <ClInclude Include="include\Moth.Core\Interfaces\IScene.h" />
     <ClInclude Include="include\Moth.Core\Moth.Core.Datatypes.h" />
     <ClInclude Include="include\Moth.Core\Moth.Core.h" />
+    <ClInclude Include="include\Moth.Core\Singleton.h" />
     <ClInclude Include="include\Moth.Core\Window.h" />
     <ClInclude Include="include\Moth.Math\Math.h" />
     <ClInclude Include="include\Moth.Math\Matrix.h" />

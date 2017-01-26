@@ -1,6 +1,9 @@
 #pragma once
 
+#define MOTH_LIB_EXPORT
+
 #include <Moth.Core\Interfaces\IGraphics3D.h>
+#include <Moth.Core\Moth.Core.h>
 
 
 namespace Moth {
@@ -11,7 +14,7 @@ namespace Moth {
 				DirectX();
 
 
-				bool Initialize();
+				bool Initialize(Moth::Core::Window*);
 				bool Shutdown();
 				bool RenderFrame();
 
@@ -25,12 +28,13 @@ namespace Moth {
 				class D3D* direct3D_;
 			};
 
-			inline Moth::Core::IGraphics3D* CreateGraphics3D() {
+			MOTHLIB Moth::Core::IGraphics3D* CreateGraphics3D() {
 				return new DirectX();
 			}
 
-			inline void ReleaseGraphics3D(Moth::Core::IGraphics3D* graphics3D) {
+			MOTHLIB void ReleaseGraphics3D(Moth::Core::IGraphics3D* graphics3D) {
 				delete(graphics3D);
+				graphics3D = nullptr;
 			}
 		}
 	}

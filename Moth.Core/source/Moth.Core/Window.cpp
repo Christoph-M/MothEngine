@@ -7,6 +7,13 @@
 
 namespace Moth {
 	namespace Core {
+		Window::Window() :
+			hwnd_(NULL),
+			className_(L""),
+			hInstance_(NULL)
+		{ }
+
+
 		bool Window::MakeWindow() {
 			DEVMODE dmScreenSettings = { 0 };
 			Moth_Int32 posX = 0,
@@ -96,6 +103,7 @@ namespace Moth {
 		}
 
 		void Window::LastErrorToMessageBox() {
+			ShowCursor(true);
 			Moth_UInt32 error = GetLastError();
 			Moth_WChar16 buffer[1024] = L"";
 			FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, NULL, error, NULL, buffer, 1024, NULL);
@@ -103,6 +111,7 @@ namespace Moth {
 		#ifdef _DEBUG
 			DebugBreak();
 		#endif
+			ShowCursor(false);
 		}
 
 		void Window::LogToConsole(Moth_WString buffer, bool brk) {
@@ -113,12 +122,14 @@ namespace Moth {
 		}
 
 		void Window::LogToMessageBox(Moth_WString buffer, Moth_WString title, Moth_Int32 style) {
+			ShowCursor(true);
 			Moth_WChar16 b[1024] = L"";
 			_snwprintf_s(b, 1024, L"%ws\n\nPress Yes to debug, No to continue.", buffer);
 			int result = MessageBox(nullptr, b, title, MB_YESNO | style);
 		#ifdef _DEBUG
 			if (result == IDYES) DebugBreak();
 		#endif
+			ShowCursor(false);
 		}
 
 		void Window::RetrieveDimensions() {
@@ -134,6 +145,6 @@ namespace Moth {
 			windowDescription_.height = dim.bottom - dim.top;
 		}
 
-		Window* Window::instance_ = 0;
+//		Window* Window::instance_ = 0;
 	}
 }

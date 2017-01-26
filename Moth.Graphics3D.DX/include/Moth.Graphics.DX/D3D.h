@@ -2,6 +2,7 @@
 
 #include <d3d11.h>
 
+#include <Moth.Core\Moth.Core.h>
 #include <Moth.Math\Moth.Math.h>
 
 #pragma comment(lib, "d3d11.lib")
@@ -26,7 +27,7 @@ namespace Moth {
 				D3D();
 
 
-				bool Initialize();
+				bool Initialize(Moth::Core::Window*);
 
 				const ID3D11Device* Device() const { return device_; }
 				const ID3D11DeviceContext* DeviceContext() const { return deviceContext_; }
@@ -51,6 +52,7 @@ namespace Moth {
 				void CreateMVPMatricies();
 
 			private:
+				Moth::Core::Window* window_;
 				AdapterDescription adapterDescription_;
 				IDXGISwapChain* swapChain_;
 				ID3D11Device* device_;

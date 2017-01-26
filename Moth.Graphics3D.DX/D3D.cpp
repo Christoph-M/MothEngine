@@ -1,8 +1,6 @@
 #include "include\Moth.Graphics.DX\D3D.h"
 #include "..\Moth.Core\include\Moth.Core\GraphicsSettings.h"
 
-#include <Moth.Core\Moth.Core.h>
-
 #include <DirectXMath.h>
 
 
@@ -10,6 +8,7 @@ namespace Moth {
 	namespace Graphics3D {
 		namespace DX {
 			D3D::D3D() :
+				window_(nullptr),
 				adapterDescription_{ false, 0, { '\0' } },
 				swapChain_(nullptr),
 				device_(nullptr),
@@ -25,7 +24,9 @@ namespace Moth {
 			{ }
 
 
-			bool D3D::Initialize() {
+			bool D3D::Initialize(Moth::Core::Window* window) {
+				window_ = window;
+
 				if (!this->RetrieveAdapterDescription()) {
 					Moth::Core::Window::LogToMessageBox(L"D3D::Initialize: Failed to retrieve adapter description", L"Error", MB_DEFBUTTON1 | MB_ICONERROR);
 					return false;
@@ -109,7 +110,7 @@ namespace Moth {
 				DXGI_MODE_DESC* displayModeList = nullptr;
 				DXGI_ADAPTER_DESC adapterDescription = { 0 };
 
-				Moth::Core::Window::Description windowDescription = Moth::Core::Window::Instance()->GetDescription();
+				Moth::Core::Window::Description windowDescription = window_->GetDescription();
 
 				adapterDescription_.vSyncEnabled = VSYNC_ENABLED;
 
@@ -191,7 +192,7 @@ namespace Moth {
 				D3D_FEATURE_LEVEL featureLevel[] = { D3D_FEATURE_LEVEL_11_1, D3D_FEATURE_LEVEL_11_0 };
 				ID3D11Texture2D* backBuffer = nullptr;
 
-				Moth::Core::Window::Description windowDescription = Moth::Core::Window::Instance()->GetDescription();
+				Moth::Core::Window::Description windowDescription = window_->GetDescription();
 
 				swapChainDescription.BufferCount = 1;
 				swapChainDescription.BufferDesc.Width = windowDescription.width;
@@ -202,10 +203,10 @@ namespace Moth {
 				swapChainDescription.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
 				swapChainDescription.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
 				swapChainDescription.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-				swapChainDescription.OutputWindow = Moth::Core::Window::Instance()->GetWindow();
+				swapChainDescription.OutputWindow = window_->GetWindow();
 				swapChainDescription.SampleDesc.Count = 1;
 				swapChainDescription.SampleDesc.Quality = 0;
-				swapChainDescription.Windowed = !FULL_SCREEN;
+				swapChainDescription.Windowed = !FULL_SCREEN || BORDERLESS;
 				swapChainDescription.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 				swapChainDescription.Flags = 0;
 
@@ -239,7 +240,7 @@ namespace Moth {
 				D3D11_DEPTH_STENCIL_DESC depthStencilDescription = { 0 };
 				D3D11_DEPTH_STENCIL_VIEW_DESC depthStencilViewDescription = { };
 
-				Moth::Core::Window::Description windowDescription = Moth::Core::Window::Instance()->GetDescription();
+				Moth::Core::Window::Description windowDescription = window_->GetDescription();
 
 				depthBufferDescription.Width = windowDescription.width;
 				depthBufferDescription.Height = windowDescription.height;
@@ -327,7 +328,7 @@ namespace Moth {
 				Moth_Float32 fieldOfView = 0.0f, aspectRatio = 0.0f;
 				DirectX::XMFLOAT4X4 orthoMatrix, projectionMatrix;
 
-				Moth::Core::Window::Description windowDescription = Moth::Core::Window::Instance()->GetDescription();
+				Moth::Core::Window::Description windowDescription = window_->GetDescription();
 
 				viewport.Width = static_cast<float>(windowDescription.width);
 				viewport.Height = static_cast<float>(windowDescription.height);

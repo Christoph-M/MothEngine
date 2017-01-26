@@ -1,0 +1,4 @@
+LIBRARY "Moth.Graphics3D.DX"
+EXPORTS
+CreateGraphics3D
+ReleaseGraphics3D

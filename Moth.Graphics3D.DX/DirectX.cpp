@@ -1,7 +1,5 @@
 #include "include\Moth.Graphics.DX\DirectX.h"
 
-#include <Moth.Core\Moth.Core.h>
-
 #include "include\Moth.Graphics.DX\D3D.h"
 
 
@@ -13,11 +11,11 @@ namespace Moth {
 			{ }
 
 
-			bool DirectX::Initialize() {
+			bool DirectX::Initialize(Moth::Core::Window* window) {
 				direct3D_ = new D3D();
 				if (!direct3D_) return false;
 
-				if (direct3D_->Initialize()) {
+				if (!direct3D_->Initialize(window)) {
 					Moth::Core::Window::LogToMessageBox(L"DirectX: Failed to initialize Direct3D", L"Error", MB_DEFBUTTON1 | MB_ICONERROR);
 					return false;
 				}
@@ -40,8 +38,8 @@ namespace Moth {
 			}
 
 			bool DirectX::RenderFrame() {
-				if (direct3D_->StartDraw(Moth::Math::FVector4 { 0.5f, 0.5f, 0.5f, 1.0f })) return false;
-				if (direct3D_->EndDraw()) return false;
+				if (!direct3D_->StartDraw(Moth::Math::FVector4 { 0.4f, 0.5f, 1.0f, 1.0f })) return false;
+				if (!direct3D_->EndDraw()) return false;
 
 				return true;
 			}

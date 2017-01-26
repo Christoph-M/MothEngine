@@ -11,7 +11,7 @@
 void main() {
 	MothCore::Application app;
 
-	MothCore::Window::Description windowDescription = MothCore::Window::Instance()->GetDescription();
+	MothCore::Window::Description windowDescription = MothCore::Window::Instance().GetDescription();
 	wprintf(L"Window size: %ld, %ld\n", windowDescription.width, windowDescription.height);
 
 	MothMath::FVector2 v1 = { 1, 1 };

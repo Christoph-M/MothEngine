@@ -20,8 +20,8 @@ namespace Fatherload {
 
 	}
 
-	void TestScene::Draw3D() {
-
+	void TestScene::Draw3D(Moth::Core::IGraphics3D* graphics3D) {
+		graphics3D->RenderFrame();
 	}
 
 	void TestScene::End() {

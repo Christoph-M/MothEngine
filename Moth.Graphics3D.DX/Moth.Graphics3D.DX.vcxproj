@@ -148,9 +148,6 @@
     <ClCompile Include="D3D.cpp" />
     <ClCompile Include="DirectX.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Exports.def" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
