@@ -26,5 +26,11 @@ void main() {
 	v1 /= v2;
 	assert((v1 == MothMath::FVector2 { 1, 1 }));
 
+	MothMath::FMatrix blah = MothMath::FMatrix::Identity();
+	blah = blah.Mul(5.0f);
+	blah /= blah;
+	blah /= blah.m[0];
+	assert(blah == MothMath::FMatrix::Identity());
+
 	app.Run(new Fatherload::TestScene());
 }
